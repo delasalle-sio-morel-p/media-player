@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bucket-List{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {#<link rel="icon" href="{{ asset('img/favicon.png') }}">#}
+</head>
+<body>
+<div class="container">
+    <header>
+        {#<a class="site-title" href="{{ path('home') }}" title="Bucket-List | Home">#}
+            {#<img src="{{ asset('img/logo.png') }}" alt="Bucket-List"> Bucket-List#}
+        {#</a>#}
+        <nav>
+            <ul>
+                <li><a href="{{ path("home") }}" title="Bucket-List | Home">Home</a></li>
+                {#<li><a href="{{ path("aboutus") }}" title="AboutUs">AboutUs</a> </li>#}
+                {#<li><a href="{{ path("list") }}" title="list">Liste d'Idées</a> </li>#}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer>
+        © {{ "now"|date("Y") }} Bucket-List
+
+        <div class="license">
+            By Fabien Alexis (https://github.com/fabianalexisinostroza/Antu-icons)<br>
+            [<a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank">CC BY-SA 3.0</a>],<br>
+            <a href="https://commons.wikimedia.org/wiki/File%3AAntu_color-fill.svg" target="_blank">via Wikimedia Commons</a>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
