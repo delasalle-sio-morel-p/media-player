@@ -27,6 +27,14 @@ class AdminController extends Controller
         return $this->render("admin/index.html.twig");
     }
 
+    /**
+     * @Route("/admin/media", name="addMedia")
+     */
+    public function addMedia()
+    {
+        return $this->render("admin/media/add.html.twig");
+    }
+
 }
 
 
