@@ -43,6 +43,21 @@ class Utilisateur
     private $password;
 
     /**
+     * @ORM\Column(type="json_array", length=255)
+     */
+    private $roles;
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="utilisateur")
      */

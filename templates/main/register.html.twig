@@ -19,6 +19,10 @@
 {% endblock %}
 
 {% block main %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Send</button>
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block title %}{{ parent() }} | Home{% endblock %}
