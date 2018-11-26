@@ -2,6 +2,7 @@
 global styles
  */
 body {
+    padding-top: 50px;
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
