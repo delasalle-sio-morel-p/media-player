@@ -27,6 +27,11 @@ class MainController extends Controller
      */
     public function home()
     {
+        $user = $this->getUser();
+        if($user!=null)
+            $status = "login";
+        else
+            $status = "logout";
         return $this->render("main/home.html.twig");
     }
 

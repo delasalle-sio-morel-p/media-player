@@ -1,28 +1,13 @@
 {% extends 'layout.html.twig' %}
 
-{% block header %}
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Media player</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
-        </div>
-    </nav>
+{% block button %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log o</button>
 {% endblock %}
 
 {% block main %}
     <form class="form-signin" action="{{ path('login') }}" method="post">
         <img src="{{ asset('img/logo.png') }}" alt="Bucket-List">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Please Log in</h1>
 
         <label for="username" class="sr-only">Username:</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
@@ -33,7 +18,7 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         <p class="mt-5 mb-3 text-muted"></p>
     </form>
 {% endblock %}
