@@ -10,7 +10,6 @@ namespace App\Controller;
 
 
 use App\Entity\Media;
-use App\Entity\Serie;
 use App\Form\MediaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;

@@ -27,17 +27,8 @@ class MainController extends Controller
      */
     public function home()
     {
-        $user = $this->getUser();
-        if($user!=null){
-            $connected = true;
-            dump($user);
-        }
-        else{
-            $connected = false;
-            dump("not connected");
-        };
         return $this->render("main/home.html.twig", [
-            'status' => $connected,
+            'status' => $this->isConnected(),
         ]);
     }
 
@@ -86,6 +77,7 @@ class MainController extends Controller
         return $this->render('main/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
+            'status' => $this->isConnected(),
         ));
     }
 
@@ -94,6 +86,18 @@ class MainController extends Controller
      */
     public function logout(){
 
+    }
+
+    public function isConnected(){
+        $user = $this->getUser();
+        if($user!=null){
+            dump("connected");
+            return true;
+        }
+        else{
+            dump("not connected");
+            return false;
+        }
     }
 
 }
