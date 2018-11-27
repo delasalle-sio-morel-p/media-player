@@ -37,6 +37,22 @@ class Media
     private $picture;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    public function getisPublished()
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
+
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $extension;

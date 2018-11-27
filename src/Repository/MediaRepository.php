@@ -19,6 +19,17 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
+    public function findMedia(int $id){
+
+        $dql = "SELECT me FROM App\Entity\Media me WHERE me.id = :id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameter('id', $id);
+
+        return $query->getOneOrNullResult();
+
+
+    }
     // /**
     //  * @return Media[] Returns an array of Media objects
     //  */
