@@ -28,11 +28,17 @@ class MainController extends Controller
     public function home()
     {
         $user = $this->getUser();
-        if($user!=null)
-            $status = "login";
-        else
-            $status = "logout";
-        return $this->render("main/home.html.twig");
+        if($user!=null){
+            $connected = true;
+            dump($user);
+        }
+        else{
+            $connected = false;
+            dump("not connected");
+        };
+        return $this->render("main/home.html.twig", [
+            'status' => $connected,
+        ]);
     }
 
     /**
@@ -83,6 +89,12 @@ class MainController extends Controller
         ));
     }
 
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
+
+    }
 
 }
 
