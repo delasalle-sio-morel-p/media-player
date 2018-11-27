@@ -2,11 +2,11 @@
 
 {% block main %}
     <h1>Details</h1>
-    <ul>
-        <li>Fichier : {{ media.name }}</li>
-        <li>Description : {{ media.description}}</li>
-    </ul>
+    {{ form_start(mediaForm) }}
+    {{ form_widget(mediaForm) }}
+    <button type="submit">Modifier</button>
+    {{ form_end(mediaForm) }}
 
 
-    <a href="{{ path("editMedia", {"id": media.id}) }}"><br>Modifier le fichier</a><a href="{{ path("admin") }}"><br>Retour à la liste</a>
+    <a href="{{ path("admin") }}"><br>Retour à la liste</a>
 {% endblock %}

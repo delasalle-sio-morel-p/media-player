@@ -63,8 +63,24 @@ class AdminController extends Controller
         $repo = $this->getDoctrine()->getRepository(Media::class);
 
         $media = $repo->findMedia($id);
+        $mediaForm = $this->createForm(MediaType::class, $media);
+        $mediaForm->handleRequest($request);
+        if($mediaForm->isSubmitted() && $mediaForm->isValid()){
+            $media->setDateCreated(new \DateTime());
+            $media->setIsPublished(true);
+            $em->persist($media);
+            $em->flush();
+            $this->addFlash("success", "Fichier ajouté, merci!");
 
-        return $this->render("admin/media/edit.html.twig", ["media" => $media]);
+            return $this->redirectToRoute("admin");
+        }
+        return $this->render("admin/media/edit.html.twig", [
+            "mediaForm" => $mediaForm->createView()
+        ]);
+//        return $this->render("admin/media/edit.html.twig", [
+//            "media" => $media,
+//            "mediaForm" => $mediaForm
+//            ]);
 
     }
 
