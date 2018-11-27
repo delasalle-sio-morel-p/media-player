@@ -164,5 +164,5 @@ class Utilisateur implements UserInterface
     {
         return $this->username;
     }
-    
+
 }
