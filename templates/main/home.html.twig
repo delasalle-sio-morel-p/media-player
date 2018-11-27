@@ -1,5 +1,8 @@
 {% extends 'layout.html.twig' %}
 
+{% block user %}
+{% endblock %}
+
 {% block connect %}
     {% if status == false %}
         <a href="{{ path("login") }}">Log in</a>
@@ -9,6 +12,25 @@
 {% endblock %}
 
 {% block main %}
+    {% if user == true %}
+        {% for media in medias %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top"
+                                 data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                                 alt="{{ media.name }}" style="height: 225px; width: 100%; display: block;" src=""
+                                 data-holder-rendered="true">
+                            <div class="card-body">
+                                <p class="card-text">{{ media.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block title %}{{ parent() }} | Home{% endblock %}

@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Media;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,10 +26,12 @@ class MainController extends Controller
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(EntityManagerInterface $em)
     {
         return $this->render("main/home.html.twig", [
             'status' => $this->isConnected(),
+            'user' => $this->isUser(),
+            'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true),array('dateCreated' => 'DESC'))
         ]);
     }
 
@@ -96,6 +99,19 @@ class MainController extends Controller
         }
         else{
             dump("not connected");
+            return false;
+        }
+    }
+
+    public function isUser(){
+        $user = $this->getUser();
+        if($user!=null){
+            $roles = $user->getRoles();
+            if($roles[0]=="ROLE_USER")
+                return true;
+            return false;
+        }
+        else{
             return false;
         }
     }

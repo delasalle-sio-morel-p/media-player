@@ -23,7 +23,7 @@
     {% block header %}
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="/media-player/public/">Media player</a>
+            <a class="navbar-brand" href="{{ path("home") }}">Media player</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,8 +31,12 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/media-player/public/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path("home") }}">Home <span class="sr-only">(current)</span></a>
                     </li>
+                    {% block admin %}
+                    {% endblock %}
+                    {% block user %}
+                    {% endblock %}
                 </ul>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                     {% block connect %}
