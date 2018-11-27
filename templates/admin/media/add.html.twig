@@ -1,13 +1,38 @@
 {% extends 'layout.html.twig' %}
 
 {% block main %}
-    <h1>Nouveau fichier :</h1>
-    <div>
-        {{ form_start(mediaForm) }}
-        {{ form_widget(mediaForm) }}
-        <button type="submit">Ajouter</button>
-        {{ form_end(mediaForm) }}
-    </div>
+
+            <h1>Nouveau fichier :</h1>
+
+            {{ form_start(mediaForm) }}
+
+            <div>
+                {{ form_row(mediaForm.name) }}
+            </div>
+            <div>
+                {{ form_row(mediaForm.description) }}
+            </div>
+            <div>
+                {{ form_row(mediaForm.extension) }}
+            </div>
+            <div>
+                {{ form_row(mediaForm.picture) }}
+            </div>
+            <div>
+                {{ form_row(mediaForm.genre) }}
+            </div>
+            <div>
+                {{ form_row(mediaForm.utilisateur) }}
+            </div>
+
+            <div>
+                <button type="submit">Ajouter</button>
+            </div>
+            {#{{ form_widget(mediaForm) }}#}
+
+
+            {{ form_end(mediaForm) }}
+
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert-{{ label }}">

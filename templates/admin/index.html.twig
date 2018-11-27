@@ -20,15 +20,38 @@
 {% endblock %}
 
 {% block main %}
-    <button><a href="{{ path("addMedia") }}">Ajouter un fichier</a></button>
     {% for media in medias %}
 
-        <p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>
-            <button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>
-        </p>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top"
+                             data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                             alt="{{ media.name }}" style="height: 225px; width: 100%; display: block;" src=""
+                             data-holder-rendered="true">
+                        <div class="card-body">
+                            <p class="card-text">{{ media.description }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path("editMedia", {"id": media.id}) }}">Modifier</a></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {#<p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>#}
+                {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
+            {#</p>#}
+        </div>
 
     {% endfor %}
 
-{% endblock %}
+    <button><a href="{{ path("addMedia") }}">Ajouter un fichier</a></button>
 
-{% block title %}{{ parent() }} | Home{% endblock %}
+{% endblock %}
