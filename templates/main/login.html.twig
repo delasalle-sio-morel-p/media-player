@@ -4,7 +4,8 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">Media player</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -19,18 +20,19 @@
 {% endblock %}
 
 {% block main %}
-    <form class="form-signin">
+    <form class="form-signin" action="{{ path('login') }}" method="post">
         <img src="{{ asset('img/logo.png') }}" alt="Bucket-List">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+
+        <label for="username" class="sr-only">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
+               placeholder="Username" required="" autofocus=""/>
+
+        <label for="password" class="sr-only">Password:</label>
+        <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required=""/>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted"></p>
     </form>
