@@ -34,6 +34,7 @@ class Utilisateur implements UserInterface
     private $email;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $username;
@@ -124,6 +125,9 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getUsername(): ?string
     {
         return $this->username;
@@ -155,4 +159,10 @@ class Utilisateur implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    public function __toString()
+    {
+        return $this->username;
+    }
+    
 }
