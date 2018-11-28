@@ -17,7 +17,7 @@ class MediaType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description',TextType::class)
-            ->add('picture', FileType::class)
+            ->add('picture', FileType::class, ['mapped' => false])
             ->add('media', FileType::class, ['mapped' => false])
             ->add('genre')
             ->add('utilisateur')

@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function admin(EntityManagerInterface $em)
     {
         return $this->render("admin/index.html.twig", [
-            'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true),array('dateCreated' => 'DESC'))
+            'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true), array('dateCreated' => 'DESC'))
         ]);
     }
 
@@ -43,11 +43,8 @@ class AdminController extends Controller
         $media = new Media();
         $mediaForm = $this->createForm(MediaType::class, $media);
         $mediaForm->handleRequest($request);
-        if($mediaForm->isSubmitted() && $mediaForm->isValid()){
+        if ($mediaForm->isSubmitted() && $mediaForm->isValid()) {
 
-////            $upload = $mediaForm->get('upload')->getData();
-////
-//            dump($upload);
             // $file stores the uploaded PDF file
             $file = $mediaForm->get('picture')->getData();
             $contenu = $mediaForm->get('media')->getData();
@@ -55,8 +52,8 @@ class AdminController extends Controller
             $extension = $contenu->guessExtension();
 
             $uniqName = md5(uniqid());
-            $fileName = $uniqName.'_picture'.'.'.$file->guessExtension();
-            $contenuName = $uniqName.'_media'.'.'.$extension;
+            $fileName = $uniqName . '_picture' . '.' . $file->guessExtension();
+            $contenuName = $uniqName . '_media' . '.' . $extension;
 
             // Move the file to the directory where brochures are stored
             try {
@@ -97,18 +94,50 @@ class AdminController extends Controller
      */
     public function editMedia(Request $request, EntityManagerInterface $em, $id)
     {
+        $media = $em->find(Media::class, $id);
 
-        $repo = $this->getDoctrine()->getRepository(Media::class);
-
-        $media = $repo->findMedia($id);
         $mediaForm = $this->createForm(MediaType::class, $media);
         $mediaForm->handleRequest($request);
-        if($mediaForm->isSubmitted() && $mediaForm->isValid()){
+        if ($mediaForm->isSubmitted() && $mediaForm->isValid()) {
+            $file = $mediaForm->get('picture')->getData();
+            $contenu = $mediaForm->get('media')->getData();
+            if ($file != null) {
+                dump($media);
+                $temp = explode("_", $media->getPicture());
+                $uniqName = $temp[0];
+                $fileName = $uniqName . '_picture' . '.' . $file->guessExtension();
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('upload_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+            if ($contenu !== null) {
+                $temp = explode("_", $media->getPicture());
+                $uniqName = $temp[0];
+                $extension = $contenu->guessExtension();
+                $contenuName = $uniqName . '_media' . '.' . $extension;
+                try {
+                    $contenu->move(
+                        $this->getParameter('upload_directory'),
+                        $contenuName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+            $media->setPicture($fileName);
+            $media->setExtension($extension);
+
             $media->setDateCreated(new \DateTime());
             $media->setIsPublished(true);
             $em->persist($media);
             $em->flush();
-            $this->addFlash("success", "Fichier ajouté, merci!");
+            $this->addFlash("success", "Fichier modifié, merci!");
 
             return $this->redirectToRoute("admin");
         }
@@ -128,11 +157,10 @@ class AdminController extends Controller
     public function delete(EntityManagerInterface $em, $id)
     {
 
-        $media = $em->find(Media::class,$id);
+        $media = $em->find(Media::class, $id);
         if (!$media) {
             throw $this->createNotFoundException('Aucun fichier en base a cet id');
-        }
-        else{
+        } else {
             $media->setIsPublished(false);
             $em->persist($media);
             $em->flush();
