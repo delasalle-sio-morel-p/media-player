@@ -1,22 +1,7 @@
 {% extends 'layout.html.twig' %}
 
-{% block header %}
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Media player</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out</button>
-        </div>
-    </nav>
+{% block connect %}
+    <a href="{{ path("logout") }}">Log out</a>
 {% endblock %}
 
 {% block main %}
@@ -35,8 +20,11 @@
                             <p class="card-text">{{ media.description }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path("editMedia", {"id": media.id}) }}">Modifier</a></button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                                                href="{{ path("editMedia", {"id": media.id}) }}">Modifier</a></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                                                href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -46,12 +34,13 @@
 
 
             {#<p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>#}
-                {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
+            {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
             {#</p>#}
         </div>
 
     {% endfor %}
 
-    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un fichier</a></button>
+    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un fichier</a>
+    </button>
 
 {% endblock %}
