@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +17,8 @@ class MediaType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description',TextType::class)
-            ->add('picture', TextType::class)
-            ->add('extension', TextType::class)
+            ->add('picture', FileType::class)
+//            ->add('extension', TextType::class)
             ->add('genre')
             ->add('utilisateur')
         ;

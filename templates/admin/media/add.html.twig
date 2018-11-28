@@ -12,27 +12,14 @@
     <div>
         {{ form_row(mediaForm.description) }}
     </div>
-    <div>
-        {{ form_row(mediaForm.extension) }}
-    </div>
+
     <div>
         {{ form_row(mediaForm.picture) }}
-    </div>
-    <div>
-        {{ form_row(mediaForm.genre) }}
+
     </div>
     <div>
         {{ form_row(mediaForm.utilisateur) }}
     </div>
-    <div class="form-group row">
-        <label class="col-form-label col-sm-2" for="">Upload</label>
-        <div class="col-sm-10">
-            <input type="file"
-                   id="avatar" name="avatar"
-                   accept="image/png, image/jpeg">
-        </div>
-    </div>
-
 
     <div>
         <button type="submit">Ajouter</button>
@@ -53,3 +40,5 @@
 {% endblock %}
 
 {% block title %}{{ parent() }} | AboutUs{% endblock %}
+
+

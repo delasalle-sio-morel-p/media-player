@@ -3,8 +3,29 @@
 {% block main %}
     <h1>Details</h1>
     {{ form_start(mediaForm) }}
-    {{ form_widget(mediaForm) }}
-    <button type="submit">Modifier</button>
+
+    <div>
+        {{ form_row(mediaForm.name) }}
+    </div>
+    <div>
+        {{ form_row(mediaForm.description) }}
+    </div>
+
+    <div>
+        {{ form_row(mediaForm.picture) }}
+
+    </div>
+    <div>
+        {{ form_row(mediaForm.utilisateur) }}
+    </div>
+
+    <div>
+        <button type="submit">Modifier</button>
+    </div>
+
+    {#{{ form_widget(mediaForm) }}#}
+
+
     {{ form_end(mediaForm) }}
 
 

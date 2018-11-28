@@ -12,11 +12,15 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Form\MediaType;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class AdminController extends Controller
 {
@@ -40,6 +44,33 @@ class AdminController extends Controller
         $mediaForm = $this->createForm(MediaType::class, $media);
         $mediaForm->handleRequest($request);
         if($mediaForm->isSubmitted() && $mediaForm->isValid()){
+
+////            $upload = $mediaForm->get('upload')->getData();
+////
+//            dump($upload);
+            // $file stores the uploaded PDF file
+            $file = $mediaForm->get('picture')->getData();
+            $extension = $file->guessExtension();
+
+            $fileName = md5(uniqid()).'.'.$extension;
+
+            // Move the file to the directory where brochures are stored
+            try {
+                $file->move(
+                    $this->getParameter('upload_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            // updates the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $media->setPicture($fileName);
+            $media->setExtension($extension);
+
+            // ... persist the $product variable or any other work
+
             $media->setDateCreated(new \DateTime());
             $media->setIsPublished(true);
             $em->persist($media);
