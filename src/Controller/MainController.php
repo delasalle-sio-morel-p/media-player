@@ -35,12 +35,6 @@ class MainController extends Controller
         if($this->isAdmin() == true){
             $user = $this->getUser();
             return $this->redirectToRoute('admin');
-//            return $this->render("admin/index.html.twig", [
-//                'status' => $this->isConnected(),
-//                'isAdmin' => $this->isUser(),
-//                'admin' => $user,
-//                'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true),array('dateCreated' => 'DESC'))
-//            ]);
         }
 
         return $this->render("main/home.html.twig", [
