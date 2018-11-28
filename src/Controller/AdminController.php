@@ -50,15 +50,23 @@ class AdminController extends Controller
 //            dump($upload);
             // $file stores the uploaded PDF file
             $file = $mediaForm->get('picture')->getData();
-            $extension = $file->guessExtension();
+            $contenu = $mediaForm->get('media')->getData();
 
-            $fileName = md5(uniqid()).'.'.$extension;
+            $extension = $contenu->guessExtension();
+
+            $uniqName = md5(uniqid());
+            $fileName = $uniqName.'_picture'.'.'.$file->guessExtension();
+            $contenuName = $uniqName.'_media'.'.'.$extension;
 
             // Move the file to the directory where brochures are stored
             try {
                 $file->move(
                     $this->getParameter('upload_directory'),
                     $fileName
+                );
+                $contenu->move(
+                    $this->getParameter('upload_directory'),
+                    $contenuName
                 );
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
