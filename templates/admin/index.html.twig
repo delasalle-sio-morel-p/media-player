@@ -5,16 +5,18 @@
 {% endblock %}
 
 {% block main %}
-    {% for media in medias %}
+    <div class="container">
 
-        <div class="container">
+        <div class="row">
+            {% for media in medias %}
 
-            <div class="row">
+
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top"
                              data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                             alt="{{ media.name }}" style="height: 225px; width: 100%; display: block;" src="{{ asset('upload/'  ~ media.picture) }}"
+                             alt="{{ media.name }}" style="height: 225px; width: 100%; display: block;"
+                             src="{{ asset('upload/'  ~ media.picture) }}"
                              data-holder-rendered="true">
                         <div class="card-body">
                             <p class="card-text">{{ media.description }}</p>
@@ -29,16 +31,17 @@
                             </div>
                         </div>
                     </div>
+
+
+                    {#<p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>#}
+                    {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
+                    {#</p>#}
                 </div>
-            </div>
 
-
-            {#<p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>#}
-            {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
-            {#</p>#}
+            {% endfor %}
         </div>
+    </div>
 
-    {% endfor %}
 
     <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un fichier</a>
     </button>

@@ -18,7 +18,6 @@ class MediaType extends AbstractType
             ->add('name', TextType::class)
             ->add('description',TextType::class)
             ->add('picture', FileType::class)
-//            ->add('extension', TextType::class)
             ->add('genre')
             ->add('utilisateur')
         ;
