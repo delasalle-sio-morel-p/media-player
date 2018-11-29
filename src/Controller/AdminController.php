@@ -236,9 +236,8 @@ class AdminController extends Controller
         if (!$media) {
             throw $this->createNotFoundException('Aucun utilisateur en base avec cet id');
         } else {
-
+            return $this->redirectToRoute("listUsers");
         }
-        return $this->redirectToRoute("listUsers");
     }
 
 
@@ -304,9 +303,8 @@ class AdminController extends Controller
         if (!$genre) {
             throw $this->createNotFoundException('Aucun genre en base avec cet id');
         } else {
-
+            return $this->redirectToRoute("listGenres");
         }
-        return $this->redirectToRoute("listGenres");
     }
 
 
@@ -367,14 +365,12 @@ class AdminController extends Controller
      */
     public function deleteTypeMedia(EntityManagerInterface $em, $id)
     {
-
         $typeMedia = $em->find(TypeMedia::class, $id);
         if (!$typeMedia) {
             throw $this->createNotFoundException('Aucun typeMedia en base avec cet id');
         } else {
-
+            return $this->redirectToRoute("listTypeMedias");
         }
-        return $this->redirectToRoute("listTypeMedias");
     }
 }
 
