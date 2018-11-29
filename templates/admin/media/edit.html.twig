@@ -46,23 +46,28 @@
                 </video>
             </div>
         {% else %}
-        <div class="embed-responsive embed-responsive-16by9">
-            <audio class="embed-responsive-item" controls="controls">
-                <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
-                        type="audio/{{ media.extension }}"/>
-                Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
-            </audio>
-        </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <audio class="embed-responsive-item" controls="controls">
+                    <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                            type="audio/{{ media.extension }}"/>
+                    Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+                </audio>
+            </div>
         {% endif %}
     </div>
 
 
     <div>
-        <button type="submit">Modifier</button>
+        <br>
+        <div class="btn-group">
+            <button class="btn btn-lg btn-light" type="submit">Modifier</button>
+            <button class="btn btn-lg btn-light" ><a href="{{ path("admin") }}">Retour à la liste</a></button>
+
+        </div>
     </div>
 
     {{ form_end(mediaForm) }}
 
 
-    <a href="{{ path("admin") }}"><br>Retour à la liste</a>
+
 {% endblock %}

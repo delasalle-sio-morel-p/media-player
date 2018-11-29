@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block connect %}
-    <a href="{{ path("logout") }}">Log out</a>
+    <a class="text-light" href="{{ path("logout") }}">Log out</a>
 {% endblock %}
 
 {% block main %}
@@ -31,13 +31,13 @@
                             <p class="card-text">{{ media.description }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                                                href="{{ path("editMedia", {"id": media.id}) }}">Modifier</a></button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                                                href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <button type="button" class="btn btn-sm btn-light">
                                         <a href="#" class="launch-modal" data-modal-id="modal-video{{ cpt }}">Lire media</a>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-light"><a
+                                                href="{{ path("editMedia", {"id": media.id}) }}">Modifier</a></button>
+                                    <button type="button" class="btn btn-sm btn-light"><a
+                                                href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a>
                                     </button>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
 
 
 
-    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un media</a>
+    <button type="button" class="btn btn-sm btn-light"><a href="{{ path("addMedia") }}">Ajouter un media</a>
     </button>
 
 
