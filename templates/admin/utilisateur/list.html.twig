@@ -17,16 +17,37 @@
 {% endblock %}
 
 {% block main %}
-    {% for user in users %}
-        <div>
-            {{ user.username }}
-            <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                        href="{{ path("editUser", {"id": user.id}) }}">Modifier</a>
-            </button>
-        </div>
-    {% endfor %}
-    <button>
-        <a class="add-user" href="{{ path('addUser') }}">
+    <div>
+        <h1>Liste des utilisateurs: </h1><br>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("editUser", {"id": user.id}) }}">Modifier</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("deleteUser", {"id": user.id}) }}">Supprimer</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-md btn-light glyphicon glyphicon-add">
+        <a class="add-typeMedia" href="{{ path('addUser') }}">
             Ajouter un utilisateur
         </a>
     </button>

@@ -95,10 +95,6 @@ li {
     text-align: left !important;
 }
 
-table, th, td
-{
-    border: 1px solid black;
-}
 
 button:hover,button:focus{
     cursor:pointer;

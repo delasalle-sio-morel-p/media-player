@@ -17,17 +17,44 @@
 {% endblock %}
 
 {% block main %}
-    {% for genre in genres %}
-        <div>
-            {{ genre.name }}
-            <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                        href="{{ path("editGenre", {"id": genre.id}) }}">Modifier</a>
-            </button>
-        </div>
-    {% endfor %}
-    <button>
-        <a class="add-genre" href="{{ path('addGenre') }}">
-            Ajouter un genre
+    <div>
+        <h1>Liste des genres: </h1><br>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for genre in genres %}
+                {#<div>#}
+                {#{{ genre.name }}#}
+                {#<button type="button" class="btn btn-sm btn-outline-secondary"><a#}
+                {#href="{{ path("editGenre", {"id": genre.id}) }}">Modifier</a>#}
+                {#</button>#}
+                {#</div>#}
+                <tr>
+                    <td>{{ genre.name }}</td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("editGenre", {"id": genre.id}) }}">Modifier</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("editGenre", {"id": genre.id}) }}">Supprimer</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-md btn-light glyphicon glyphicon-add">
+        <a class="add-typeMedia" href="{{ path('addGenre') }}">
+            Nouveau genre
         </a>
     </button>
 {% endblock %}

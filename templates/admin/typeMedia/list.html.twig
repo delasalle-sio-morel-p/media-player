@@ -17,17 +17,40 @@
 {% endblock %}
 
 {% block main %}
-    {% for typeMedia in typeMedias %}
-        <div>
-            {{ typeMedia.name }}
-            <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                        href="{{ path("editTypeMedia", {"id": typeMedia.id}) }}">Modifier</a>
-            </button>
-        </div>
-    {% endfor %}
-    <button>
-        <a class="add-typeMedia" href="{{ path('addTypeMedia') }}">
-            Ajouter un type de Media
+    <div>
+        <h1>Types de médias: </h1><br>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for typeMedia in typeMedias %}
+
+                <tr>
+                    <td>{{ typeMedia.name }}</td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("editTypeMedia", {"id": typeMedia.id}) }}">Modifier</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-md btn-light glyphicon glyphicon-edit"><a
+                                    href="{{ path("editTypeMedia", {"id": typeMedia.id}) }}">Supprimer</a>
+                        </button>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-md btn-light glyphicon glyphicon-add">
+        <a class="add-typeMedia" href="{{ path('addGenre') }}">
+            Nouveau type
         </a>
     </button>
 {% endblock %}
