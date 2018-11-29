@@ -5,9 +5,9 @@
 
 {% block connect %}
     {% if status == false %}
-        <a href="{{ path("login") }}">Log in</a>
+        <a class="text-light" href="{{ path("login") }}">Log in</a>
     {% else %}
-        <a href="{{ path("logout") }}">Log out</a>
+        <a class="text-light" href="{{ path("logout") }}">Log out</a>
     {% endif %}
 {% endblock %}
 
