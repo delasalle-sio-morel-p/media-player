@@ -1,4 +1,9 @@
 {% extends 'layout.html.twig' %}
+{% block admin %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listUsers") }}">Users Mgt<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
 
 {% block connect %}
     <a href="{{ path("logout") }}">Log out</a>
@@ -6,11 +11,8 @@
 
 {% block main %}
     <div class="container">
-
         <div class="row">
             {% for media in medias %}
-
-
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top"
@@ -31,13 +33,7 @@
                             </div>
                         </div>
                     </div>
-
-
-                    {#<p><a href="{{ path("editMedia", {"id": media.id}) }}">{{ media.name }}</a>#}
-                    {#<button><a href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer ce fichier</a></button>#}
-                    {#</p>#}
                 </div>
-
             {% endfor %}
         </div>
     </div>

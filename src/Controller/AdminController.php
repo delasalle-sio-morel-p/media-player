@@ -9,8 +9,14 @@
 namespace App\Controller;
 
 
+use App\Entity\Genre;
 use App\Entity\Media;
+use App\Entity\TypeMedia;
+use App\Entity\Utilisateur;
+use App\Form\GenreType;
 use App\Form\MediaType;
+use App\Form\TypeMediaType;
+use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,6 +30,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends Controller
 {
+    //--------------------------------------------------------------------------------------------------
+    //------------------------------------- Management Media -------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     /**
      * @Route("/admin", name="admin")
      */
@@ -142,19 +151,15 @@ class AdminController extends Controller
             return $this->redirectToRoute("admin");
         }
         return $this->render("admin/media/edit.html.twig", [
+            "media" => $media,
             "mediaForm" => $mediaForm->createView()
         ]);
-//        return $this->render("admin/media/edit.html.twig", [
-//            "media" => $media,
-//            "mediaForm" => $mediaForm
-//            ]);
-
     }
 
     /**
      * @Route("/admin/media/delete/{id}", name="deleteMedia")
      */
-    public function delete(EntityManagerInterface $em, $id)
+    public function deleteMedia(EntityManagerInterface $em, $id)
     {
 
         $media = $em->find(Media::class, $id);
@@ -168,6 +173,197 @@ class AdminController extends Controller
         return $this->redirectToRoute("admin");
     }
 
+
+    //--------------------------------------------------------------------------------------------------
+    //------------------------------------- Management Utilisateur -------------------------------------
+    //--------------------------------------------------------------------------------------------------
+    /**
+     * @Route("/admin/user/list", name="listUsers")
+     */
+    public function listUsers(EntityManagerInterface $em)
+    {
+        return $this->render("admin/utilisateur/list.html.twig", [
+            'users' => $em->getRepository(Utilisateur::class)->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/user/add", name="addUser")
+     */
+    public function addUser(Request $request, EntityManagerInterface $em)
+    {
+
+        $user = new Utilisateur();
+        $userForm = $this->createForm(UtilisateurType::class, $user);
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            return $this->redirectToRoute("listUsers");
+        }
+        return $this->render("admin/utilisateur/add.html.twig", [
+            "userForm" => $userForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/user/edit/{id}", name="editUser")
+     */
+    public function editUser(Request $request, EntityManagerInterface $em, $id)
+    {
+        $user = $em->find(Utilisateur::class, $id);
+
+        $userForm = $this->createForm(UtilisateurType::class, $user);
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            return $this->redirectToRoute("listUsers");
+        }
+        return $this->render("admin/utilisateur/edit.html.twig", [
+            "user" => $user,
+            "userForm" => $userForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/user/delete/{id}", name="deleteUser")
+     */
+    public function deleteUser(EntityManagerInterface $em, $id)
+    {
+
+        $media = $em->find(Utilisateur::class, $id);
+        if (!$media) {
+            throw $this->createNotFoundException('Aucun utilisateur en base avec cet id');
+        } else {
+
+        }
+        return $this->redirectToRoute("listUsers");
+    }
+
+
+    //--------------------------------------------------------------------------------------------------
+    //------------------------------------- Management Genre -------------------------------------------
+    //--------------------------------------------------------------------------------------------------
+    /**
+     * @Route("/admin/genre/list", name="listGenres")
+     */
+    public function listGenres(EntityManagerInterface $em)
+    {
+        return $this->render("admin/genre/list.html.twig", [
+            'genres' => $em->getRepository(Genre::class)->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/genre/add", name="addGenre")
+     */
+    public function addGenre(Request $request, EntityManagerInterface $em)
+    {
+
+        $genre = new Genre();
+        $genreForm = $this->createForm(GenreType::class, $genre);
+        $genreForm->handleRequest($request);
+        if ($genreForm->isSubmitted() && $genreForm->isValid()) {
+            return $this->redirectToRoute("listGenres");
+        }
+        return $this->render("admin/utilisateur/add.html.twig", [
+            "genreForm" => $genreForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/genre/edit/{id}", name="editGenre")
+     */
+    public function editGenre(Request $request, EntityManagerInterface $em, $id)
+    {
+        $genre = $em->find(Genre::class, $id);
+
+        $genreForm = $this->createForm(GenreType::class, $genre);
+        $genreForm->handleRequest($request);
+        if ($genreForm->isSubmitted() && $genreForm->isValid()) {
+            return $this->redirectToRoute("listGenres");
+        }
+        return $this->render("admin/genre/edit.html.twig", [
+            "genre" => $genre,
+            "genreForm" => $genreForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/genre/delete/{id}", name="deleteGenre")
+     */
+    public function deleteGenre(EntityManagerInterface $em, $id)
+    {
+
+        $genre = $em->find(Genre::class, $id);
+        if (!$genre) {
+            throw $this->createNotFoundException('Aucun genre en base avec cet id');
+        } else {
+
+        }
+        return $this->redirectToRoute("listGenres");
+    }
+
+
+
+    //--------------------------------------------------------------------------------------------------
+    //------------------------------------- Management TypeMedia -------------------------------------------
+    //--------------------------------------------------------------------------------------------------
+    /**
+     * @Route("/admin/typeMedia/list", name="listTypeMedia")
+     */
+    public function listTypeMedia(EntityManagerInterface $em)
+    {
+        return $this->render("admin/typeMedia/list.html.twig", [
+            'typeMedia' => $em->getRepository(TypeMedia::class)->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/typeMedia/add", name="addTypeMedia")
+     */
+    public function addTypeMedia(Request $request, EntityManagerInterface $em)
+    {
+        $typeMedia = new TypeMedia();
+        $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
+        $typeMediaForm->handleRequest($request);
+        if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
+            return $this->redirectToRoute("listTypeMedia");
+        }
+        return $this->render("admin/typeMedia/add.html.twig", [
+            "typeMediaForm" => $typeMediaForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/typeMedia/edit/{id}", name="editTypeMedia")
+     */
+    public function editTypeMedia(Request $request, EntityManagerInterface $em, $id)
+    {
+        $typeMedia = $em->find(TypeMedia::class, $id);
+
+        $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
+        $typeMediaForm->handleRequest($request);
+        if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
+            return $this->redirectToRoute("listTypeMedia");
+        }
+        return $this->render("admin/typeMedia/edit.html.twig", [
+            "typeMedia" => $typeMedia,
+            "typeMediaForm" => $typeMediaForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/typeMedia/delete/{id}", name="deleteTypeMedia")
+     */
+    public function deleteTypeMedia(EntityManagerInterface $em, $id)
+    {
+
+        $typeMedia = $em->find(TypeMedia::class, $id);
+        if (!$typeMedia) {
+            throw $this->createNotFoundException('Aucun typeMedia en base avec cet id');
+        } else {
+
+        }
+        return $this->redirectToRoute("listTypeMedia");
+    }
 }
 
 

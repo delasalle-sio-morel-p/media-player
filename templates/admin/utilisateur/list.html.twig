@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block admin %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listUsers") }}">Users Mgt<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block connect %}
+    <a href="{{ path("logout") }}">Log out</a>
+{% endblock %}
+
+{% block main %}
+    {% for user in users %}
+        <p>{{ user.username }}</p>
+    {% endfor %}
+    <button>
+        <a class="add-user" href="{{ path('addUser') }}">
+            Ajouter un utilisateur
+        </a>
+    </button>
+{% endblock %}
