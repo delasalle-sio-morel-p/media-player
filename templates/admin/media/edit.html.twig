@@ -1,5 +1,15 @@
 {% extends 'layout.html.twig' %}
-
+{% block admin %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listUsers") }}">Utilisateurs<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listTypeMedias") }}">TypeMedia<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listGenres") }}">Genres<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
 {% block main %}
     <h1>Details</h1>
     {{ form_start(mediaForm) }}
@@ -24,14 +34,27 @@
     <div>
         {{ form_row(mediaForm.media) }}
     </div>
-    {#<div>#}
-        {#<video width="400" height="222" controls="controls">#}
-            {#<source src="{{ mediaForm }}" type="video/mp4"/>#}
-            {#<source src="video.webm" type="video/webm"/>#}
-            {#<source src="video.ogv" type="video/ogg"/>#}
-            {#Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.#}
-        {#</video>#}
-    {#</div>#}
+    <div>
+        {% set urlMedia = media.picture|split('_') %}
+        {% if media.extension == "mp4" %}
+            <div class="embed-responsive embed-responsive-16by9">
+                <video class="embed-responsive-item" controls="controls">
+
+                    <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                            type="video/{{ media.extension }}"/>
+                    Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+                </video>
+            </div>
+        {% else %}
+        <div class="embed-responsive embed-responsive-16by9">
+            <audio class="embed-responsive-item" controls="controls">
+                <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                        type="audio/{{ media.extension }}"/>
+                Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+            </audio>
+        </div>
+        {% endif %}
+    </div>
 
 
     <div>

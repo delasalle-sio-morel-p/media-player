@@ -18,6 +18,7 @@
 {% block main %}
     <div class="container">
         <div class="row">
+            {% set cpt = 0 %}
             {% for media in medias %}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
@@ -35,17 +36,68 @@
                                     <button type="button" class="btn btn-sm btn-outline-secondary"><a
                                                 href="{{ path("deleteMedia", {"id": media.id}) }}">Supprimer</a>
                                     </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <a href="#" class="launch-modal" data-modal-id="modal-video{{ cpt }}">Lire media</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal-video{{ cpt }}" tabindex="-1" role="dialog"
+                     aria-labelledby="modal-video-label">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% set urlMedia = media.picture|split('_') %}
+                            {% if media.extension == "mp4" %}
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <video class="embed-responsive-item" controls="controls">
+
+                                        <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                                                type="video/{{ media.extension }}"/>
+                                        Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+                                    </video>
+                                </div>
+                            {% else %}
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <audio class="embed-responsive-item" controls="controls">
+                                        <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                                                type="audio/{{ media.extension }}"/>
+                                        Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+                                    </audio>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% set cpt = cpt + 1 %}
             {% endfor %}
         </div>
     </div>
 
 
-    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un fichier</a>
+
+    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{{ path("addMedia") }}">Ajouter un media</a>
     </button>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.launch-modal').on('click', function (e) {
+                e.preventDefault();
+                $('#' + $(this).data('modal-id')).modal();
+            });
+        });
+
+
+    </script>
+
+
 
 {% endblock %}
