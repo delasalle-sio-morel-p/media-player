@@ -27,12 +27,15 @@
 
 
     <div>
-        <button type="submit">Modifier</button>
+        <br>
+        <div class="btn-group">
+            <button class="btn btn-lg btn-light" type="submit">Enregistrer</button>
+            <button class="btn btn-lg btn-light" ><a href="{{ path("listGenres") }}">Retour à la liste</a></button>
+
+        </div>
     </div>
 
     {{ form_end(genreForm) }}
-
-    <a href="{{ path("listGenres") }}"><br>Retour à la liste</a>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}

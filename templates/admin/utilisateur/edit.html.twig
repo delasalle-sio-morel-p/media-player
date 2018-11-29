@@ -30,17 +30,21 @@
     <div>
         {{ form_row(userForm.username) }}
     </div>
-    <div>
-        {{ form_row(userForm.password) }}
-    </div>
+    {#<div>#}
+        {#{{ form_row(userForm.password) }}#}
+    {#</div>#}
+
 
     <div>
-        <button type="submit">Modifier</button>
+        <br>
+        <div class="btn-group">
+            <button class="btn btn-lg btn-light" type="submit">Enregistrer</button>
+            <button class="btn btn-lg btn-light" ><a href="{{ path("listUsers") }}">Retour à la liste</a></button>
+
+        </div>
     </div>
 
     {{ form_end(userForm) }}
-
-    <a href="{{ path("listUsers") }}"><br>Retour à la liste</a>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
