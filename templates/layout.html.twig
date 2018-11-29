@@ -35,6 +35,8 @@
                     {% block user %}
                     {% endblock %}
                 </ul>
+                {% block register %}
+                {% endblock %}
                 <button class="btn btn-secondary" type="submit">
                     {% block connect %}
                         <a class="text-light" href="{{ path("logout") }}">Log out</a>
