@@ -197,6 +197,8 @@ class AdminController extends Controller
         $userForm = $this->createForm(UtilisateurType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $em->persist($user);
+            $em->flush();
             return $this->redirectToRoute("listUsers");
         }
         return $this->render("admin/utilisateur/add.html.twig", [
@@ -214,6 +216,8 @@ class AdminController extends Controller
         $userForm = $this->createForm(UtilisateurType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $em->persist($user);
+            $em->flush();
             return $this->redirectToRoute("listUsers");
         }
         return $this->render("admin/utilisateur/edit.html.twig", [
@@ -261,6 +265,8 @@ class AdminController extends Controller
         $genreForm = $this->createForm(GenreType::class, $genre);
         $genreForm->handleRequest($request);
         if ($genreForm->isSubmitted() && $genreForm->isValid()) {
+            $em->persist($genre);
+            $em->flush();
             return $this->redirectToRoute("listGenres");
         }
         return $this->render("admin/genre/add.html.twig", [
@@ -278,6 +284,8 @@ class AdminController extends Controller
         $genreForm = $this->createForm(GenreType::class, $genre);
         $genreForm->handleRequest($request);
         if ($genreForm->isSubmitted() && $genreForm->isValid()) {
+            $em->persist($genre);
+            $em->flush();
             return $this->redirectToRoute("listGenres");
         }
         return $this->render("admin/genre/edit.html.twig", [
@@ -325,6 +333,8 @@ class AdminController extends Controller
         $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
         $typeMediaForm->handleRequest($request);
         if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
+            $em->persist($typeMedia);
+            $em->flush();
             return $this->redirectToRoute("listTypeMedias");
         }
         return $this->render("admin/typeMedia/add.html.twig", [
@@ -342,6 +352,8 @@ class AdminController extends Controller
         $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
         $typeMediaForm->handleRequest($request);
         if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
+            $em->persist($typeMedia);
+            $em->flush();
             return $this->redirectToRoute("listTypeMedias");
         }
         return $this->render("admin/typeMedia/edit.html.twig", [

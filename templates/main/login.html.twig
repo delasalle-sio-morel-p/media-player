@@ -13,16 +13,23 @@
         <img src="{{ asset('img/logo.png') }}" alt="Bucket-List">
         <h1 class="h3 mb-3 font-weight-normal">Please Log in</h1>
 
-        <label for="username" class="sr-only">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
-               placeholder="Username" required="" autofocus=""/>
+        <div class="col-sm-4 offset-sm-4">
+            <label for="username" class="sr-only">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
+                   placeholder="Username" required="" autofocus=""/>
+        </div>
 
-        <label for="password" class="sr-only">Password:</label>
-        <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required=""/>
-
+        <div class="col-sm-4 offset-sm-4">
+            <label for="password" class="sr-only">Password:</label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Password"
+                   required=""/>
+        </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <br>
+        <div>
+            <button class="btn btn-md btn-primary btn-md" type="submit">Login</button>
+            <a href="{{ path('resetpwd') }}">Mot de passe oublié</a>
+        </div>
         <p class="mt-5 mb-3 text-muted"></p>
     </form>
 {% endblock %}

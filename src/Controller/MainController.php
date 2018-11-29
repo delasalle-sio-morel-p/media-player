@@ -113,6 +113,41 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * @Route("/user", name="user")
+     */
+    public function user(EntityManagerInterface $em)
+    {
+        $user = null;
+        if($this->isUser() == true)
+            $user = $this->getUser();
+
+        if($this->isAdmin() == true){
+            $user = $this->getUser();
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render("main/home.html.twig", [
+            'status' => $this->isConnected(),
+            'isUser' => $this->isUser(),
+            'user' => $user,
+            'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true),array('dateCreated' => 'DESC'))
+        ]);
+    }
+
+    /**
+     * @Route("/user/resetpwd", name="resetpwd")
+     */
+    public function resetpwd(EntityManagerInterface $em)
+    {
+        return $this->render("main/resetpwd.html.twig", [
+            'status' => $this->isConnected(),
+            'isUser' => $this->isUser(),
+            'medias' => $em->getRepository(Media::class)->findBy(array('isPublished' => true),array('dateCreated' => 'DESC'))
+        ]);
+    }
+
+
     public function isUser(){
         $user = $this->getUser();
         if($user!=null){

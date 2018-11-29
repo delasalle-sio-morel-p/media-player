@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+{% block connect %}
+    <a class="text-light" href="{{ path("login") }}">Log in</a>
+{% endblock %}
+
+{% block main %}
+    <form>
+        <h4 class="form__subtitle">Saisissez votre e-mail ou votre numéro de téléphone</h4>
+        <div class="form-group col-sm-4 offset-sm-4">
+            <input type="text" class="form-control" id="username" placeholder="Email ou Username">
+        </div>
+
+        <button class="btn btn-secondary btn-lg" id="reset-password-submit-button" type="submit">
+            Redéfinir le mot de passe
+        </button>
+    </form>
+{% endblock %}
