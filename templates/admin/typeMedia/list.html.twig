@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block admin %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listUsers") }}">Utilisateurs<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listGenres") }}">Genres<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listTypeMedias") }}">TypeMedia<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block connect %}
+    <a href="{{ path("logout") }}">Log out</a>
+{% endblock %}
+
+{% block main %}
+    {% for typeMedia in typeMedias %}
+        <p>{{ typeMedia.name }}</p>
+    {% endfor %}
+    <button>
+        <a class="add-typeMedia" href="{{ path('addTypeMedia') }}">
+            Ajouter un type de Media
+        </a>
+    </button>
+{% endblock %}

@@ -307,12 +307,12 @@ class AdminController extends Controller
     //------------------------------------- Management TypeMedia -------------------------------------------
     //--------------------------------------------------------------------------------------------------
     /**
-     * @Route("/admin/typeMedia/list", name="listTypeMedia")
+     * @Route("/admin/typeMedia/list", name="listTypeMedias")
      */
-    public function listTypeMedia(EntityManagerInterface $em)
+    public function listTypeMedias(EntityManagerInterface $em)
     {
         return $this->render("admin/typeMedia/list.html.twig", [
-            'typeMedia' => $em->getRepository(TypeMedia::class)->findAll()
+            'typeMedias' => $em->getRepository(TypeMedia::class)->findAll()
         ]);
     }
 
@@ -325,7 +325,7 @@ class AdminController extends Controller
         $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
         $typeMediaForm->handleRequest($request);
         if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
-            return $this->redirectToRoute("listTypeMedia");
+            return $this->redirectToRoute("listTypeMedias");
         }
         return $this->render("admin/typeMedia/add.html.twig", [
             "typeMediaForm" => $typeMediaForm->createView()
@@ -342,7 +342,7 @@ class AdminController extends Controller
         $typeMediaForm = $this->createForm(TypeMediaType::class, $typeMedia);
         $typeMediaForm->handleRequest($request);
         if ($typeMediaForm->isSubmitted() && $typeMediaForm->isValid()) {
-            return $this->redirectToRoute("listTypeMedia");
+            return $this->redirectToRoute("listTypeMedias");
         }
         return $this->render("admin/typeMedia/edit.html.twig", [
             "typeMedia" => $typeMedia,
@@ -362,7 +362,7 @@ class AdminController extends Controller
         } else {
 
         }
-        return $this->redirectToRoute("listTypeMedia");
+        return $this->redirectToRoute("listTypeMedias");
     }
 }
 
