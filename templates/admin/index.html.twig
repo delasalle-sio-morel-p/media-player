@@ -55,7 +55,16 @@
                                 </button>
                             </div>
                             {% set urlMedia = media.picture|split('_') %}
-                            {% if media.extension == "mp4" %}
+                            {% if media.extension == "mp3" %}
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <audio class="embed-responsive-item" controls="controls">
+                                        <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
+                                                type="audio/{{ media.extension }}"/>
+                                        Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+                                    </audio>
+                                </div>
+
+                            {% else %}
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <video class="embed-responsive-item" controls="controls">
 
@@ -63,14 +72,6 @@
                                                 type="video/{{ media.extension }}"/>
                                         Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
                                     </video>
-                                </div>
-                            {% else %}
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <audio class="embed-responsive-item" controls="controls">
-                                        <source src="{{ asset("upload/"~urlMedia[0]~"_media."~media.extension) }}"
-                                                type="audio/{{ media.extension }}"/>
-                                        Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
-                                    </audio>
                                 </div>
                             {% endif %}
                         </div>
