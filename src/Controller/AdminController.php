@@ -263,7 +263,7 @@ class AdminController extends Controller
         if ($genreForm->isSubmitted() && $genreForm->isValid()) {
             return $this->redirectToRoute("listGenres");
         }
-        return $this->render("admin/utilisateur/add.html.twig", [
+        return $this->render("admin/genre/add.html.twig", [
             "genreForm" => $genreForm->createView()
         ]);
     }
