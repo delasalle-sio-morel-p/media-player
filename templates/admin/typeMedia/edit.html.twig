@@ -14,7 +14,7 @@
 
 {% block main %}
 
-    <h2>Modifier type de Media :</h2>
+    <h2>Modifier le type:</h2>
 
     {{ form_start(typeMediaForm) }}
 
@@ -23,12 +23,15 @@
     </div>
 
     <div>
-        <button type="submit">Modifier</button>
+        <br>
+        <div class="btn-group">
+            <button class="btn btn-lg btn-light" type="submit">Enregistrer</button>
+            <button class="btn btn-lg btn-light" ><a href="{{ path("listTypeMedias") }}">Retour à la liste</a></button>
+
+        </div>
     </div>
 
     {{ form_end(typeMediaForm) }}
-
-    <a href="{{ path("listTypeMedias") }}"><br>Retour à la liste</a>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
