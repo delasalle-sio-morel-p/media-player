@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block admin %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listUsers") }}">Utilisateurs<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listTypeMedias") }}">TypeMedia<span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path("listGenres") }}">Genres<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block main %}
+
+    <h2>Modifier genre :</h2>
+
+    {{ form_start(genreForm) }}
+
+    <div>
+        {{ form_row(genreForm.name) }}
+    </div>
+    <div>
+        {{ form_row(genreForm.typeMedia) }}
+    </div>
+
+
+    <div>
+        <button type="submit">Ajouter</button>
+    </div>
+
+    {{ form_end(genreForm) }}
+
+    <a href="{{ path("listGenres") }}"><br>Retour à la liste</a>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}{{ parent() }} | AboutUs{% endblock %}
+
+

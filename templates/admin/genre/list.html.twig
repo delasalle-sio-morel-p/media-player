@@ -18,7 +18,12 @@
 
 {% block main %}
     {% for genre in genres %}
-        <p>{{ genre.name }}</p>
+        <div>
+            {{ genre.name }}
+            <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                        href="{{ path("editGenre", {"id": genre.id}) }}">Modifier</a>
+            </button>
+        </div>
     {% endfor %}
     <button>
         <a class="add-genre" href="{{ path('addGenre') }}">

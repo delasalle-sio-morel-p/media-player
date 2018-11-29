@@ -18,7 +18,12 @@
 
 {% block main %}
     {% for user in users %}
-        <p>{{ user.username }}</p>
+        <div>
+            {{ user.username }}
+            <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                        href="{{ path("editUser", {"id": user.id}) }}">Modifier</a>
+            </button>
+        </div>
     {% endfor %}
     <button>
         <a class="add-user" href="{{ path('addUser') }}">

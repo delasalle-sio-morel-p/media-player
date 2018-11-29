@@ -18,7 +18,12 @@
 
 {% block main %}
     {% for typeMedia in typeMedias %}
-        <p>{{ typeMedia.name }}</p>
+        <div>
+            {{ typeMedia.name }}
+            <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                        href="{{ path("editTypeMedia", {"id": typeMedia.id}) }}">Modifier</a>
+            </button>
+        </div>
     {% endfor %}
     <button>
         <a class="add-typeMedia" href="{{ path('addTypeMedia') }}">
